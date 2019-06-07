@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Products(models.Model):
+class Product(models.Model):
     # We specify the model fields
     product_name = models.CharField(max_length=100)
     brands = models.CharField(max_length=100, null=True)
