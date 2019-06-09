@@ -1,0 +1,9 @@
+{% if full_list %}
+    <ul>
+    {% for product in full_list %}
+        <li><a href="/foodsearch/{{ product.id }}/">{{ product.product_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No products are available.</p>
+{% endif %}
