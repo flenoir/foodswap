@@ -1,14 +1,25 @@
-<p>Index.html</p>
-<!-- {{ text }} -->
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
 
-<form method="post">
-    {% csrf_token%}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+    <div class="container">
+            <p>Index.html</p>
+            <!-- {{ text }} -->
 
-<!-- <h2>{{ res }}</h2> -->
+            <form method="post">
+                {% csrf_token%}
+                {{ form.as_p }}
+                <button class= "btn btn-primary" type="submit">Submit</button>
+            </form>
 
-{% for r in res %}
-<li>{{ r }}</li>
-{% endfor %}
+            <!-- <h2>{{ res }}</h2> -->
+
+            {% for r in res %}
+            <li>{{ r }}</li>
+            {% endfor %}
+    </div>
+
+</body>
+</html>
