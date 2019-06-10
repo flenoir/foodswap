@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from foodsearch.search_form import SearchForm
 
 from .models import Product
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello this si foodsearch app")
+    form = SearchForm()
+    return render(request, 'foodsearch/index.html', {'form': form})
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
@@ -17,4 +19,8 @@ def list_products(request):
     context = {
         'full_list' : full_list
     }
-    return render(request, 'foodsearch/index.html', context)
+    return render(request, 'foodsearch/list_products.html', context)
+
+# def get(request):
+#     form = SearchForm()
+#     return render(request, 'foodsearch/index.html', {'form': form})

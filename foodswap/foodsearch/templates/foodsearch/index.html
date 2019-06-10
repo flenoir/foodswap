@@ -1,4 +1,4 @@
-{% if full_list %}
+<!-- {% if full_list %}
     <ul>
     {% for product in full_list %}
         <li><a href="/foodsearch/{{ product.id }}/">{{ product.product_name }}</a></li>
@@ -6,4 +6,13 @@
     </ul>
 {% else %}
     <p>No products are available.</p>
-{% endif %}
+{% endif %} -->
+
+<p>Index.html</p>
+{{ text }}
+
+<form method="post">
+    {% csrf_token%}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
