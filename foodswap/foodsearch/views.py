@@ -12,7 +12,10 @@ def index(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data['post']
-            return render(request, 'foodsearch/index.html', {'form': form, 'data': data })
+            db_res = Product.objects.filter(product_name__contains=data)
+            res = [i.product_name for i in db_res]
+
+            return render(request, 'foodsearch/index.html', {'form': form, 'res': db_res })
 
     form = SearchForm()
     return render(request, 'foodsearch/index.html', {'form': form})
