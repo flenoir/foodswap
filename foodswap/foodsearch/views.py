@@ -7,6 +7,13 @@ from .models import Product
 # Create your views here.
 
 def index(request):
+    if request.method == 'POST':
+        print("post")
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data['post']
+            return render(request, 'foodsearch/index.html', {'form': form, 'data': data })
+
     form = SearchForm()
     return render(request, 'foodsearch/index.html', {'form': form})
 
