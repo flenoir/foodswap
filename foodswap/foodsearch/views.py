@@ -15,7 +15,7 @@ def index(request):
             db_res = Product.objects.filter(product_name__contains=data)
             res = [i.product_name for i in db_res]
 
-            return render(request, 'foodsearch/index.html', {'form': form, 'res': db_res })
+            return render(request, 'foodsearch/index.html', {'form': form, 'res': res })
 
     form = SearchForm()
     return render(request, 'foodsearch/index.html', {'form': form})
