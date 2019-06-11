@@ -20,21 +20,8 @@ import debug_toolbar
 urlpatterns = [
     # path(route, view, kwargs, name)
     path('admin/', admin.site.urls),
-    # path('foodsearch/', include('foodsearch.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('authentication/', include('authentication.urls')),
     path('search/', include('search.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
-
-# from django.conf import settings
-# from django.conf.urls import include, url  # For django versions before 2.0
-# from django.urls import include, path  # For django versions from 2.0 and up
-
-# if settings.DEBUG:
-#     import debug_toolbar
-#     urlpatterns = [
-#         path('__debug__/', include(debug_toolbar.urls)),
-
-#         # For django versions before 2.0:
-#         # url(r'^__debug__/', include(debug_toolbar.urls)),
-
-#     ] + urlpatterns
