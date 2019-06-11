@@ -21,7 +21,7 @@ urlpatterns = [
     # path(route, view, kwargs, name)
     path('admin/', admin.site.urls),
     # path('foodsearch/', include('foodsearch.urls')),
-    path('foodsearch/', include('foodsearch.urls')),
+    path('search/', include('search.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 

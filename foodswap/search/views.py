@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from foodsearch.search_form import SearchForm
+from search.search_form import SearchForm
 
 from .models import Product
 
@@ -14,23 +14,24 @@ def index(request):
             data = form.cleaned_data['post']
             db_res = Product.objects.filter(product_name__contains=data)
             res = [i.product_name for i in db_res]
+            print(res)
 
-            return render(request, 'foodsearch/index.html', {'form': form, 'res': res })
+            return render(request, 'search/index.html', {'form': form, 'res': res })
 
     form = SearchForm()
-    return render(request, 'foodsearch/index.html', {'form': form})
+    return render(request, 'search/index.html', {'form': form})
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'foodsearch/detail.html', {'product': product, 'code': product.product_code})    
+    return render(request, 'search/detail.html', {'product': product, 'code': product.product_code})    
 
 def list_products(request):
     full_list = Product.objects.all()[:5]    
     context = {
         'full_list' : full_list
     }
-    return render(request, 'foodsearch/list_products.html', context)
+    return render(request, 'search/list_products.html', context)
 
 # def get(request):
 #     form = SearchForm()
-#     return render(request, 'foodsearch/index.html', {'form': form})
+#     return render(request, 'search/index.html', {'form': form})

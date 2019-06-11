@@ -3,7 +3,7 @@ import re
 import os
 
 from django.core.management.base import BaseCommand, CommandError
-from foodsearch.models import Product
+from search.models import Product
 
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "foodswap.settings")
 
