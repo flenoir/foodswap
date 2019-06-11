@@ -9,7 +9,7 @@ from .models import Product
 def index(request):
     if request.method == 'POST':
         print("post")
-        form = SearchForm(request.POST)
+        form = SearchForm(request.POST) # instanciation de l'objet formulaire avec les données de l'objet de la requête
         if form.is_valid():
             data = form.cleaned_data['post']
             db_res = Product.objects.filter(product_name__contains=data)
