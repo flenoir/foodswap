@@ -20,7 +20,7 @@ import debug_toolbar
 urlpatterns = [
     # path(route, view, kwargs, name)
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('authentication/', include('django.contrib.auth.urls')),
     path('authentication/', include('authentication.urls')),
     path('search/', include('search.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
