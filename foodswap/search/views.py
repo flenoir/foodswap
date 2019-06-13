@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from search.search_form import SearchForm
+from django.contrib.auth.decorators import login_required
 
 from .models import Product
 
@@ -25,6 +26,7 @@ def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'search/detail.html', {'product': product, 'code': product.product_code})    
 
+@login_required
 def list_products(request):
     full_list = Product.objects.all()[:5]    
     context = {
