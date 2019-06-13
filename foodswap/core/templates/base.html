@@ -18,6 +18,7 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'list_products' %}">List</a></li> 
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'password_change' %}">password change</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">login</a></li>
