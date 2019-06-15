@@ -7,7 +7,6 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
-
     # We specify the model fields
     product_name = models.CharField(max_length=100)
     brands = models.CharField(max_length=100, null=True)

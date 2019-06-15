@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+
+            <p>Index.html</p>
+            <!-- {{ text }} -->
+
+            {% if user.is_authenticated %}
+            hello {{user.username}}
+            {% else %}
+            hello visitor
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token%}
+                {{ form.as_p }}
+                <button class= "btn btn-primary" type="submit">Submit</button>
+            </form>
+
+            <!-- <h2>{{ res }}</h2> -->
+
+            {% for r in res %}
+            <li>{{ r }}</li>
+            {% endfor %}
+    </div>
+
+
+{% endblock %}
