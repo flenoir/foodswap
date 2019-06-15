@@ -21,7 +21,7 @@
             <!-- <h2>{{ res }}</h2> -->
 
             {% for r in res %}
-            <li>{{ r }}</li>
+            <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
             {% endfor %}
     </div>
 
