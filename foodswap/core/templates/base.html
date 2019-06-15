@@ -1,44 +1,62 @@
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/custom-style.css' %}" type="text/css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #c7e7f6">
             <div class="container">
-                <a class="navbar-brand" href="#">Foodswap</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'core/Foodswap_Logo.jpg' %}" height=45px></a>
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> -->
             
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/search/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                                    
-                    {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'list_products' %}">List</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">logout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'password_change' %}">password change</a></li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'password_reset' %}">Password_reset</a></li>
-                    {% endif %}
-                    
+                    </li>           
+                                       
                     </ul>
                     <!-- <form class="form-inline my-2 my-lg-0"> -->
                     {% if user.is_authenticated %}
-                    {% else %}
-                    <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign up</a>
-                    <a class="btn btn-outline-success  ml-2" href="{% url 'login' %}">login</a>
+                    <a class="nav-link" href="{% url 'list_products' %}">List</a>                    
+                    {% else %}                    
                     {% endif %}
                     <!-- </form> -->
                 </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if user.is_authenticated %}
+                      {{ user.username }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>  
+                      <a class="dropdown-item" href="{% url 'logout' %}">Disconnect</a>
+                    </div>
+                    {% else %}                      
+                       Visitor
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                       <a class="dropdown-item" href="{% url 'signup' %}">Sign up</a>  
+                       <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                      </div>
+                    {% endif %}                                         
+                  </div>
             </div>
         </nav>
 
 {% block body %}
+
+<div class="container">
+    
+</div>
+
 
 {% endblock %}
 </body>

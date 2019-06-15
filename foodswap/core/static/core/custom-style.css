@@ -1,0 +1,10 @@
+body {
+    /* background-color: bisque; */
+    background-image: url(foodswap_background.jpg);
+    background-size: 100% auto;
+}
+
+.navbar-default {
+    /* background-color:  #a7d4ea; */
+    /* border-color: #E7E7E7; */
+}
