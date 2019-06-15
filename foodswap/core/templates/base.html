@@ -51,13 +51,28 @@
             </div>
         </nav>
 
-{% block body %}
+
 
 <div class="container">
+
+  
+    <div class="row align-items-center">
+        <div class="col">
+          
+        </div>
+        <div class="col-8" style="margin-top: 220px;">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+        <div class="col">
+          
+        </div>
+      </div>
     
 </div>
 
 
-{% endblock %}
+
 </body>
 </html>
