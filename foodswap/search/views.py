@@ -15,6 +15,7 @@ def index(request):
             data = form.cleaned_data['post']
             db_res = Product.objects.filter(product_name__contains=data)
             res = [i for i in db_res]
+            print(data)
             print(res)
 
             return render(request, 'search/index.html', {'form': form, 'res': res })
