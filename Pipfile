@@ -11,6 +11,7 @@ psycopg2 = "*"
 django-debug-toolbar = "*"
 requests = "*"
 django-crispy-forms = "*"
+stop-words = "*"
 
 [requires]
 python_version = "3.6"
