@@ -27,9 +27,14 @@ class Command(BaseCommand):
         
             for x, i in enumerate(temp_var['products']):
 
-                single_brand = re.findall("^([^,]*)", str(i['brands']))
                 try:
-                    x = Product(product_name=i['product_name_fr'], brands=str(single_brand), description=i['generic_name_fr'], product_url=i['url'] ,product_code=i['code'], product_image=i['image_ingredients_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'])
+                    single_brand = re.findall("^([^,]*)", str(i['brands']))
+                except KeyError:
+                    single_brand = "none"
+
+                
+                try:
+                    x = Product(product_name=i['product_name_fr'], brands=str(single_brand), description=i['generic_name_fr'], product_url=i['url'] ,product_code=i['code'], product_image=i['image_ingredients_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'], nova_groups=i['nova_groups'])
                     x.save()
                     self.stdout.write(str(x.id))
                 except KeyError as e:

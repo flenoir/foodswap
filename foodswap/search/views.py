@@ -49,7 +49,7 @@ def words_filter(resulting_search):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'search/detail.html', {'product': product, 'code': product.product_code})    
+    return render(request, 'search/detail.html', {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups})    
 
 @login_required
 def list_products(request):
