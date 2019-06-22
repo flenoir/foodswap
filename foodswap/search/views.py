@@ -65,17 +65,20 @@ def swap(request, product_id):
     print(categories_res)
     arr = []
     for x in categories_res:
-        print(x.nutriscore.capitalize())
+        print(x.nutriscore.capitalize(), x.product_code)
         z = compare_products(x, product)
-        arr.append(z)
-    print("the substitutes is {}".format(arr[1][0]))
-    # this is the id that should be return as substitute for current product
-    context = {
-        'obj' : z
-    }
-    # le mieux serait , en-dessous, de mettre detail.html
-    return render(request, 'search/swap.html', context)
+        if z is not None:
+            arr.append(z)
+    print("the substitutes is {}".format(arr[0][0]))
     
+    substitute = arr[0][0]
+    print(substitute.product_code)
+    # this is the id that should be return as substitute for current product
+
+    json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize()}
+    # le mieux serait , en-dessous, de mettre detail.html
+    return render(request, 'search/swap.html', json_data)
+
 
 def compare_products(x, y):
     abc = ["a","b","c","d","e","f","g"]
@@ -83,10 +86,14 @@ def compare_products(x, y):
     res1 = abc.index(x.nutriscore)
     res2 = abc.index(y.nutriscore)
     print(res1, res2)
+    
     if res1 < res2:
-        print("better product")
+        print("better product")        
         return x, x.id
-    print("worse product")
+    else:
+        print("worse product")
+        # return 'toto'
+    
 
 @login_required
 def list_products(request):

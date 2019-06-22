@@ -1,5 +1,40 @@
-<h1>swap</h1>
+{% extends 'base.html' %}
 
-{% for p in obj %}
-        <li>{{ p }}</li>
-{% endfor %}
+{% block body %}
+
+<h1>Substitute food with a better nutriscore</h1>
+
+<table class="table">
+        <!-- <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>        
+          </tr>
+        </thead> -->
+        <tbody>
+          <tr>
+            <th scope="row">Name</th>        
+            <td>{{ product }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Code</th>        
+            <td>{{ code }}</td>   
+          </tr>
+          <tr>
+            <th scope="row">Nutriscore</th>
+            <td>{{ nutriscore }}</td>
+            </tr>
+          <tr>
+            <th scope="row">Nova groups</th>
+            <td>{{ nova_groups }}</td>
+          </tr>
+          <tr>
+            <th scope="row">categories</th>        
+            <td>{{ categories }}</td>
+          </tr>    
+        </tbody>
+      </table>
+
+{% endblock %}
+
