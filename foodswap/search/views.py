@@ -49,7 +49,44 @@ def words_filter(resulting_search):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'search/detail.html', {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups})    
+    json_data = {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups, 'categories': product.categories, 'nutriscore': product.nutriscore.capitalize()}
+    return render(request, 'search/detail.html', json_data)
+
+def swap(request, product_id):
+    # get categories form request => done
+    # search database for products matching all categories and with nutriscore corresponding to A 
+    # display food product
+
+    product = get_object_or_404(Product, pk=product_id)
+    print(product.categories, product.nutriscore)
+    splited = product.categories.split(",")
+    print(splited)
+    categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2])
+    print(categories_res)
+    arr = []
+    for x in categories_res:
+        print(x.nutriscore.capitalize())
+        z = compare_products(x, product)
+        arr.append(z)
+    print("the substitutes is {}".format(arr[1][0]))
+    # this is the id that should be return as substitute for current product
+    context = {
+        'obj' : z
+    }
+    # le mieux serait , en-dessous, de mettre detail.html
+    return render(request, 'search/swap.html', context)
+    
+
+def compare_products(x, y):
+    abc = ["a","b","c","d","e","f","g"]
+    # if x location's index in abc is lower than y location's index then...
+    res1 = abc.index(x.nutriscore)
+    res2 = abc.index(y.nutriscore)
+    print(res1, res2)
+    if res1 < res2:
+        print("better product")
+        return x, x.id
+    print("worse product")
 
 @login_required
 def list_products(request):

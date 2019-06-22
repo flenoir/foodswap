@@ -18,5 +18,6 @@ class Product(models.Model):
     stores = models.CharField(max_length=150, null=True)
     quantity = models.CharField(max_length=40, null=True)    
     nova_groups = models.CharField(max_length=5, null=True)
+    categories = models.CharField(max_length=500, null=True)
 
     

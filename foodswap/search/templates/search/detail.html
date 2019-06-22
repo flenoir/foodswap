@@ -2,10 +2,39 @@
 
 {% block body %}
 
-{{ product }}
+<table class="table">
+    <!-- <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>        
+      </tr>
+    </thead> -->
+    <tbody>
+      <tr>
+        <th scope="row">Name</th>        
+        <td>{{ product }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Code</th>        
+        <td>{{ code }}</td>   
+      </tr>
+      <tr>
+        <th scope="row">Nutriscore</th>
+        <td>{{ nutriscore }}</td>
+        </tr>
+      <tr>
+        <th scope="row">Nova groups</th>
+        <td>{{ nova_groups }}</td>
+      </tr>
+      <tr>
+        <th scope="row">categories</th>        
+        <td>{{ categories }}</td>
+      </tr>    
+    </tbody>
+  </table>
 
-{{ code }}
-
-{{ nova_groups }}
+   <!-- <button class="btn btn-warning" href="/search/swap/{{product.id}}">Swap</button> -->
+   <button><a class="btn btn-warning" href="/search/swap/{{product.id}}">Swap</a> </button>
 
 {% endblock %}
