@@ -5,16 +5,11 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from search.models import Product
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "foodswap.settings")
 
-# from models import Product
-
-class Command(BaseCommand):
-
-    
+class Command(BaseCommand):  
 
     # get id and name from categories to populate products table
-    # def fill_db_from_categories(self, cat):
+    
     def handle(self, *args, **options):
 
         CATEGORIES_ARRAY = ['petit-dejeuners', 'plats-prepares', 'snacks-sales', 'biscuits-et-gateaux', 'snacks-sucres', 'produits-laitiers', 'epicerie', 'desserts', 'charcuteries', 'cereales-et-derives']
@@ -34,19 +29,9 @@ class Command(BaseCommand):
 
                 
                 try:
-                    x = Product(product_name=i['product_name_fr'], brands=str(single_brand), description=i['generic_name_fr'], product_url=i['url'] ,product_code=i['code'], product_image=i['image_ingredients_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'], nova_groups=i['nova_groups'], categories=i['categories'])
+                    x = Product(product_name=i['product_name_fr'].casefold(), brands=str(single_brand), description=i['generic_name_fr'].casefold(), product_url=i['url'] ,product_code=i['code'], product_image=i['image_ingredients_url'] , nutriscore=i['nutrition_grades'], stores=i['stores_tags'], quantity=i['quantity'], nova_groups=i['nova_groups'], categories=i['categories'])
                     x.save()
                     self.stdout.write(str(x.id))
                 except KeyError as e:
                     print(e)
                     self.stdout.write(str(e))
-
-
-    # fill_db_from_categories(CATEGORIES_ARRAY)
-
-
-    # args = '<team_id>'
-    # help = 'Affiche la liste des backlogs'
-
-    # def handle(self, *args, **options):
-    #     self.stdout.write('Coucou !')

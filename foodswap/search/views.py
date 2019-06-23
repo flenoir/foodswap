@@ -31,7 +31,8 @@ def index(request):
 
 
 def words_filter(resulting_search):
-    """ filter the number of words in search with AND"""    
+    """ filter the number of words in search with AND """
+
     if len(resulting_search) < 2:
         result = Product.objects.filter(product_name__contains=resulting_search[0])
         return result
@@ -53,34 +54,36 @@ def detail(request, product_id):
     return render(request, 'search/detail.html', json_data)
 
 def swap(request, product_id):
-    # get categories form request => done
-    # search database for products matching all categories and with nutriscore corresponding to A 
-    # display food product
+    """ 
+    get categories form request
+    search database for products matching all categories and with nutriscore corresponding to A 
+    display food product
+    """
 
     product = get_object_or_404(Product, pk=product_id)
-    print(product.categories, product.nutriscore)
-    splited = product.categories.split(",")
-    print(splited)
+    splited = product.categories.split(",")    
     categories_res = Product.objects.filter(categories__contains=splited[0]).filter(categories__contains=splited[1]).filter(categories__contains=splited[2])
-    print(categories_res)
+    
     arr = []
-    for x in categories_res:
-        print(x.nutriscore.capitalize(), x.product_code)
+    for x in categories_res:        
         z = compare_products(x, product)
         if z is not None:
             arr.append(z)
-    print("the substitutes is {}".format(arr[0][0]))
-    
-    substitute = arr[0][0]
-    print(substitute.product_code)
-    # this is the id that should be return as substitute for current product
 
-    json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize()}
-    # le mieux serait , en-dessous, de mettre detail.html
+    if bool(arr) is False:
+        substitute = product
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': 'no better product found'}
+    else: 
+        substitute = arr[0][0]
+        print(substitute.product_code)        
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': ''}
+   
     return render(request, 'search/swap.html', json_data)
 
 
 def compare_products(x, y):
+    """ compare nutriscores to return better product"""
+
     abc = ["a","b","c","d","e","f","g"]
     # if x location's index in abc is lower than y location's index then...
     res1 = abc.index(x.nutriscore)
@@ -92,8 +95,7 @@ def compare_products(x, y):
         return x, x.id
     else:
         print("worse product")
-        # return 'toto'
-    
+        
 
 @login_required
 def list_products(request):
