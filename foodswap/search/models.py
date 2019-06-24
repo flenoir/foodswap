@@ -20,4 +20,7 @@ class Product(models.Model):
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
 
+
+class Substitute(models.Model):
     
+    substitutes = models.ManyToManyField(Product)
