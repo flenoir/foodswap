@@ -19,8 +19,10 @@ class Product(models.Model):
     quantity = models.CharField(max_length=40, null=True)    
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
+    substitutes = models.ManyToManyField("self")
 
+    @classmethod
+    def associate(cls, current_product_id, substitute_product):
+        subs_product = cls.objects.get(id=current_product_id)
+        subs_product.substitutes.add(substitute_product)
 
-class Substitute(models.Model):
-    
-    substitutes = models.ManyToManyField(Product)
