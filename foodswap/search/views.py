@@ -105,14 +105,24 @@ def list_products(request):
     }
     return render(request, 'search/list_products.html', context)
 
-
+@login_required
 def add_substitute(request, product_id):
-    print(product_id)
-    current_user = request.user
-    print(current_user.id)
-    current_user_list = Product.objects.all().filter(user_product=current_user)
-    print(current_user_list)
+    # add current substitute to serached product using fk relation
+
+
+    # redirect to substitute list of connected user
+    
+    current_user = request.user    
+    # current_user_list = Product.objects.all().filter(user_product=current_user)
+    substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
+    
+    sub_list = []
+    for i in substitutes_list:
+        for j in  i.substitutes.all():
+            # print(i.product_code, j)
+            sub_list.append(j)
+    
     context = {
-        'full_list' : current_user_list
+        'full_list' : sub_list
     }
     return render(request, 'search/list_products.html', context)
