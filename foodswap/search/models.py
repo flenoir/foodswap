@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -20,9 +22,13 @@ class Product(models.Model):
     nova_groups = models.CharField(max_length=5, null=True)
     categories = models.CharField(max_length=500, null=True)
     substitutes = models.ManyToManyField("self")
+    user_product = models.ManyToManyField(User)
 
-    @classmethod
-    def associate(cls, current_product_id, substitute_product):
-        subs_product = cls.objects.get(id=current_product_id)
-        subs_product.substitutes.add(substitute_product)
+    # @classmethod
+    # def associate(cls, current_product_id, substitute_product):
+    #     subs_product = cls.objects.get(id=current_product_id)
+    #     subs_product.substitutes.add(substitute_product)
+
+    def associate(self, substitute_product):
+        self.substitutes.add(substitute_product)
 

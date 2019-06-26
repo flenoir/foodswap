@@ -72,11 +72,11 @@ def swap(request, product_id):
 
     if bool(arr) is False:
         substitute = product
-        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': 'no better product found'}
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': 'no better product found', 'id': product_id}
     else: 
         substitute = arr[0][0]
         print(substitute.product_code)        
-        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': ''}
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': '', 'id': product_id}
    
     return render(request, 'search/swap.html', json_data)
 
@@ -91,10 +91,10 @@ def compare_products(x, y):
     print(res1, res2)
     
     if res1 < res2:
-        print("better product")        
+        # print("better product")        
         return x, x.id
-    else:
-        print("worse product")
+    # else:
+    #     print("worse product")
         
 
 @login_required
@@ -102,5 +102,17 @@ def list_products(request):
     full_list = Product.objects.all()[:5]    
     context = {
         'full_list' : full_list
+    }
+    return render(request, 'search/list_products.html', context)
+
+
+def add_substitute(request, product_id):
+    print(product_id)
+    current_user = request.user
+    print(current_user.id)
+    current_user_list = Product.objects.all().filter(user_product=current_user)
+    print(current_user_list)
+    context = {
+        'full_list' : current_user_list
     }
     return render(request, 'search/list_products.html', context)
