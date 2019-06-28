@@ -106,14 +106,16 @@ def list_products(request):
     return render(request, 'search/list_products.html', context)
 
 @login_required
-def add_substitute(request, product_id):
-    # add current substitute to serached product using fk relation
+def add_substitute(request, product_id, subs_id):
 
+    current_user = request.user 
+
+    # add current substitute to searched product using fk relation    
+    product_to_associate = Product.objects.get(id=product_id)    
+    product_to_associate.user_product.set([current_user]) # why do we need to put brackets here ??
+    product_to_associate.associate(subs_id)
 
     # redirect to substitute list of connected user
-    
-    current_user = request.user    
-    # current_user_list = Product.objects.all().filter(user_product=current_user)
     substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
     
     sub_list = []
