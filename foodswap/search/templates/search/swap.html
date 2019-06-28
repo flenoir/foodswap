@@ -4,9 +4,11 @@
 
 <h1>Substitute food with a better nutriscore</h1>
 
-{{ status }}
+{%  if  status != "" %}
+<div class="alert alert-danger" role="alert">{{ status }}</div>
+{% endif %}
 
-{{ product.id  }}
+<p style="display:none">{{ product.id  }}</p>
 
 <table class="table">
         <!-- <thead>
@@ -40,7 +42,7 @@
         </tbody>
       </table>
 
-     <button class='btn btn-secondary'> <a href="{% url 'add_substitute' id product.id %}"> Add to substitute list</a></button>
+     <a class="btn btn-secondary" href="{% url 'add_substitute' id product.id %}" role="button">Add to substitute list</a>
 
 {% endblock %}
 
