@@ -4,39 +4,53 @@
 
 <h1>Your selected food</h1>
 
-<table class="table">
-    <!-- <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>        
-      </tr>
-    </thead> -->
-    <tbody>
-      <tr>
-        <th scope="row">Name</th>        
-        <td>{{ product }}</td>
-      </tr>
-      <tr>
-        <th scope="row">Code</th>        
-        <td>{{ code }}</td>   
-      </tr>
-      <tr>
-        <th scope="row">Nutriscore</th>
-        <td>{{ nutriscore }}</td>
-        </tr>
-      <tr>
-        <th scope="row">Nova groups</th>
-        <td>{{ nova_groups }}</td>
-      </tr>
-      <tr>
-        <th scope="row">categories</th>        
-        <td>{{ categories }}</td>
-      </tr>    
-    </tbody>
-  </table>
 
-   <!-- <button class="btn btn-warning" href="/search/swap/{{product.id}}">Swap</button> -->
-   <button><a class="btn btn-warning" href="/search/swap/{{product.id}}">Swap</a> </button>
+
+  <div class="row">
+		<div class="col-md-8">
+			<h3>
+				{{ product }}
+			</h3>
+			<!-- <div class="alert alert-success alert-dismissable">
+				 
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Alert!
+				</h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+			</div> -->
+			<dl>
+				<dt>Product code :</dt>
+				<dd>{{ code }}</dd>
+				<dt>
+					Nutriscore :
+				</dt>
+				<dd>
+					{{ nutriscore }}
+				</dd>			
+				<dt>
+					Novagroup :
+				</dt>
+				<dd>
+					{{ nova_groups }}
+				</dd>
+				<dt>
+					Categories :
+				</dt>
+				<dd>
+					{{ categories }}
+				</dd>
+      </dl> 
+      
+      <a class="btn btn-warning" href="/search/swap/{{product.id}}" role="button">Swap</a>
+			<!-- <button type="button" class="btn btn-success">
+				Button
+			</button> -->
+		</div>
+		<div class="col-md-4 ml 4">
+			<img alt="{{ product }}" src="{{ image }}" class="rounded" />
+		</div>
+	</div>
 
 {% endblock %}

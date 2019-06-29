@@ -50,7 +50,8 @@ def words_filter(resulting_search):
 
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    json_data = {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups, 'categories': product.categories, 'nutriscore': product.nutriscore.capitalize()}
+    print(product.product_image)
+    json_data = {'product': product, 'code': product.product_code, 'nova_groups': product.nova_groups, 'categories': product.categories, 'nutriscore': product.nutriscore.capitalize(), 'image': product.product_image}
     return render(request, 'search/detail.html', json_data)
 
 def swap(request, product_id):
@@ -72,7 +73,7 @@ def swap(request, product_id):
 
     if bool(arr) is False:
         substitute = product
-        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': 'no better product found', 'id': product_id}
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'status': 'no better product found', 'id': product_id}
     else: 
         substitute = arr[0][0]
         print(substitute.product_code)        
@@ -99,32 +100,39 @@ def compare_products(x, y):
 
 @login_required
 def list_products(request):
-    full_list = Product.objects.all()[:5]    
-    context = {
-        'full_list' : full_list
-    }
+    current_user = request.user
+
+    context = get_substitutes(current_user)
+
     return render(request, 'search/list_products.html', context)
 
 @login_required
 def add_substitute(request, product_id, subs_id):
 
-    current_user = request.user 
+    current_user = request.user
 
     # add current substitute to searched product using fk relation    
     product_to_associate = Product.objects.get(id=product_id)    
     product_to_associate.user_product.set([current_user]) # why do we need to put brackets here ??
     product_to_associate.associate(subs_id)
 
+    context = get_substitutes(current_user)
+
+    return render(request, 'search/list_products.html', context)
+
+
+def get_substitutes(current_user):
     # redirect to substitute list of connected user
     substitutes_list = Product.objects.filter(substitutes__isnull=False).filter(user_product=current_user)
     
     sub_list = []
     for i in substitutes_list:
-        for j in  i.substitutes.all():
-            # print(i.product_code, j)
+        for j in i.substitutes.all():            
             sub_list.append(j)
-    
+
     context = {
-        'full_list' : sub_list
+        'full_list': sub_list
     }
-    return render(request, 'search/list_products.html', context)
+
+    return context
+

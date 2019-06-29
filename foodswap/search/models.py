@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
 
     def __str__(self):
-        return self.product_name
+        return self.product_name.capitalize()
 
     # We specify the model fields
     product_name = models.CharField(max_length=100)
