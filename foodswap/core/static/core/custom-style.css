@@ -34,3 +34,11 @@ body {
 .rounded {
     border-radius:.75rem!important
 }
+
+.search_container {
+    background-color: #DE9440; 
+    opacity: 1;
+    padding: 20 20 20 20;
+    height: 90px;
+
+}
