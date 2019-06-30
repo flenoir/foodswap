@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block first_row %}
 
-{% if full_list %}
+    {% if full_list %}
     <ul>
     {% for product in full_list %}
         <li><a href="/search/{{ product.id }}/">{{ product.product_name }}</a></li>
     {% endfor %}
     </ul>
-{% else %}
-    <p>No products are available.</p>
-{% endif %}
+    {% else %}
+    <p>Aucun produit n'est disponible</p>
+    {% endif %}
 
 {% endblock %}

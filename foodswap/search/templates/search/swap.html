@@ -1,48 +1,61 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block first_row %}
 
 <h1>Substitute food with a better nutriscore</h1>
 
-{%  if  status != "" %}
-<div class="alert alert-danger" role="alert">{{ status }}</div>
-{% endif %}
+<div class="row">
+		<div class="col-md-8">
+			<h3>
+				{{ product }}
+      </h3>
+      
+      <p style="display:none">{{ product.id  }}</p>
 
-<p style="display:none">{{ product.id  }}</p>
+      {%  if  status != "" %}
+			<div class="alert alert-danger alert-dismissable">
+				 
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+					×
+				</button>
+				<h4>
+					Alerte Produit !
+				</h4>  {{ status }} <a href="#" class="alert-link"></a>
+      </div>
+      {% endif %}
 
-<table class="table">
-        <!-- <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>        
-          </tr>
-        </thead> -->
-        <tbody>
-          <tr>
-            <th scope="row">Name</th>        
-            <td>{{ product }}</td>
-          </tr>
-          <tr>
-            <th scope="row">Code</th>        
-            <td>{{ code }}</td>   
-          </tr>
-          <tr>
-            <th scope="row">Nutriscore</th>
-            <td>{{ nutriscore }}</td>
-            </tr>
-          <tr>
-            <th scope="row">Nova groups</th>
-            <td>{{ nova_groups }}</td>
-          </tr>
-          <tr>
-            <th scope="row">categories</th>        
-            <td>{{ categories }}</td>
-          </tr>    
-        </tbody>
-      </table>
+			<dl>
+				<dt>Product code :</dt>
+				<dd>{{ code }}</dd>
+				<dt>
+					Nutriscore :
+				</dt>
+				<dd>
+					{{ nutriscore }}
+				</dd>			
+				<dt>
+					Novagroup :
+				</dt>
+				<dd>
+					{{ nova_groups }}
+				</dd>
+				<dt>
+					Categories :
+				</dt>
+				<dd>
+					{{ categories }}
+				</dd>
+      </dl> 
+      
+      <a class="btn btn-secondary" href="{% url 'add_substitute' id product.id %}" role="button">Add to substitute list</a>
+	
+		</div>
+		<div class="col-md-4 ml 4">
+			<img alt="{{ product }}" src="{{ image }}" class="rounded" />
+		</div>
+	</div>
 
-     <a class="btn btn-secondary" href="{% url 'add_substitute' id product.id %}" role="button">Add to substitute list</a>
+
 
 {% endblock %}
 

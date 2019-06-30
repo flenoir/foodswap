@@ -59,9 +59,30 @@
 
         <div class="container-fluid">
 
-        {% block body %}
+            <div class="row align-items-center">
+                <div class="col-md-12 first_row_bg">
+                    <div class="container first_row_window rounded">
+                    {% block first_row %}
 
-        {% endblock %}
+                    {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {% block second_row %}
+
+                {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+
+     
+            
+
            
         </div>
 

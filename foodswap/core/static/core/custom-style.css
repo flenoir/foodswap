@@ -16,7 +16,7 @@ body {
     opacity: 0.85;
     padding-top: 50px;
     padding-left: 20px;
-    height: 500px;
+    height: 650px;
 }
 
 .navbar-default {
@@ -29,4 +29,8 @@ body {
     font-size: 20px;
     font-style: bold;
     font-weight: 400;
+}
+
+.rounded {
+    border-radius:.75rem!important
 }
