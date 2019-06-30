@@ -7,28 +7,39 @@
 
     {% block first_row %}
 
+        <div style="background-color: #345A61; padding: 40 40 20 40; opacity: 0.80;" class="rounded">
+
         {% if user.is_authenticated %}
-        <h1>Du gras oui, mais de qualité !</h1>
-        <h3>{{user.username}}, trouvez un produit de substitution pour ceux que vous consommez tous les jours</h3> 
+        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+        <h3 style="color:white">{{user.username}}, trouvez un produit de substitution pour ceux que vous consommez tous les jours</h3> 
         {% else %}
-        <h1>Du gras oui, mais de qualité !</h1>
-        <h3>Chere visiteur, trouvez un produit de substitution pour ceux que vous consommez tous les jours </h3> 
+        <h1 style="color:white">Du gras oui, mais de qualité !</h1>
+        <h3 style="color:white">Cher(e) visiteur(euse), trouvez un produit de substitution pour ceux que vous consommez tous les jours </h3> 
         {% endif %}
 
+        </div>
 
-        <!-- <div class="search_container rounded"> -->
-        
-        <form method="post" class="form-inline justify-content-center search_container rounded"  novalidate>
+
+                
+        <form method="post" class="form-inline justify-content-center search_container rounded" style="margin-top: 80px" novalidate>
             {% csrf_token%}
             {{ form|crispy }}
             <button class= "btn btn-primary ml-4" type="submit">Chercher</button>
         </form>
 
-        {% for r in res %}
-        <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
-        {% endfor %}
+        {% if res is not None %}
 
-        <!-- </div> -->
+            <div class="first_row_window rounded">
+
+            {% for r in res %}
+            <li><a href="{{ r.id }}">{{ r.product_name }}</a></li>
+            {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+        
     
     {% endblock %}
 

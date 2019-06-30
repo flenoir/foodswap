@@ -2,6 +2,8 @@
 
 {% block first_row %}
 
+<div class="first_row_window rounded">
+
     {% if full_list %}
     <ul>
     {% for product in full_list %}
@@ -11,5 +13,7 @@
     {% else %}
     <p>Aucun produit n'est disponible</p>
     {% endif %}
+
+</div>
 
 {% endblock %}

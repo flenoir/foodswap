@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'core/custom-style.css' %}" type="text/css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #c7e7f6">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #C45525">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'core/logo_pur_beurre.png' %}" height=45px></a>
                 <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,14 +19,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link main_title" href="/search/">Pure Beurre<span class="sr-only">(current)</span></a>
+                        <a class="nav-link main_title" style="color: white;" href="/search/">Pure Beurre<span class="sr-only">(current)</span></a>
                     </li>           
                                        
                     </ul>
                     <!-- <form class="form-inline my-2 my-lg-0"> -->
                     {% if user.is_authenticated %}
                     <!-- <a class="nav-link" href="{% url 'list_products' %}">List</a> -->
-                    <a class="btn btn-success" href="{% url 'list_products' %}" role="button">My substitutes</a>                   
+                    <!-- <a class="btn btn-success" href="{% url 'list_products' %}" role="button">My substitutes</a> -->
+                    <a href="{% url 'list_products' %}"><img src="{% static 'core/noun_Carrot_29691_cropped.png' %}" height=50px></a>                   
                     {% else %}                    
                     {% endif %}
                     <!-- </form> -->
@@ -61,7 +62,7 @@
 
             <div class="row align-items-center">
                 <div class="col-md-12 first_row_bg">
-                    <div class="container first_row_window rounded">
+                    <div class="container ">
                     {% block first_row %}
 
                     {% endblock %}
