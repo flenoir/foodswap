@@ -73,11 +73,11 @@ def swap(request, product_id):
 
     if bool(arr) is False:
         substitute = product
-        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'status': 'no better product found', 'id': product_id}
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'image': substitute.product_image,'status': 'no better product found', 'id': product_id}
     else: 
         substitute = arr[0][0]
         print(substitute.product_code)        
-        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(), 'status': '', 'id': product_id}
+        json_data = {'product': substitute, 'code': substitute.product_code, 'nova_groups': substitute.nova_groups, 'categories': substitute.categories, 'nutriscore': substitute.nutriscore.capitalize(),'image': substitute.product_image,'status': '', 'id': product_id}
    
     return render(request, 'search/swap.html', json_data)
 
